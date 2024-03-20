@@ -2,12 +2,13 @@ package toDoList;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 
 public class Step extends ListElement{
 	
-	public Step(String description) {
-		super(description);
+	public Step(String description, List<? extends ListElement> list) {
+		super(description, list);
 		setButtonListener();
 	}
 	

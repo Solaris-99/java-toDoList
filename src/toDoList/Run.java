@@ -19,10 +19,10 @@ public class Run {
 		ActionListener AddTaskBtnListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				Task task = new Task(layoutForm.textField.getText());
+				Task task = new Task(layoutForm.textField.getText(), tasks);
 				tasks.add(task);
 				
-				tasksLayout.addBtnListPanel(task.getButton());
+				tasksLayout.addToListPanel(task.panel);
 				layoutForm.panel.revalidate();
 				layoutForm.panel.repaint();
 				System.out.println("Task added");

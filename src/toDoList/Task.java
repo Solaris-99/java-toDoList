@@ -11,8 +11,8 @@ public class Task extends ListElement{
 	private List<Step> steps;
 	
 	
-	public Task (String name) {
-		super(name);
+	public Task (String name, List<? extends ListElement> list) {
+		super(name, list);
 		setButtonListener();
 		this.steps = new ArrayList<>();
 	}
@@ -43,11 +43,14 @@ public class Task extends ListElement{
 	private void createLayout() {
 		Layout stepsLayout = new Layout(400,600,steps);
 		AddElemForm form = stepsLayout.getForm();
+		//button for adding steps
 		ActionListener AddStepBtnListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				Step step = new Step(form.textField.getText());
+				
+				Step step = new Step(form.textField.getText(), steps);
 				add(step);
+				stepsLayout.addToListPanel(step.panel);
 				form.panel.revalidate();
 				form.panel.repaint();
 			}

@@ -4,8 +4,8 @@ import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import toDoList.ListElement;
 
@@ -54,8 +54,8 @@ public class Layout {
 		jframe.repaint();
 	}
 	
-	public void addBtnListPanel(JButton btn) {
-		listPanel.panel.add(btn);
+	public void addToListPanel(JPanel panel) {
+		listPanel.panel.add(panel);
 	}
 	
 }

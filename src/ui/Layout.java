@@ -17,7 +17,7 @@ public class Layout {
 
 	//add layout manager
 	
-	public Layout(int w, int h, List<? extends ListElement> elemList) {
+	public Layout(int w, int h, List<? extends ListElement> elemList, String title, int closeOperation) {
 		jframe = new JFrame();
 		Container pane = jframe.getContentPane();
 		
@@ -27,9 +27,9 @@ public class Layout {
 	
 		pane.setLayout(new BorderLayout());
 		
-		jframe.setBounds(10, 10, w, h);
-		jframe.setTitle("To-Do List");
-		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jframe.setBounds(25, 25, w, h);
+		jframe.setTitle(title);
+		jframe.setDefaultCloseOperation(closeOperation);
 		pane.add(form.panel,BorderLayout.NORTH);
 		pane.add(listPanel.panel,BorderLayout.CENTER);
 		jframe.setVisible(true);
@@ -55,7 +55,7 @@ public class Layout {
 	}
 	
 	public void addToListPanel(JPanel panel) {
-		listPanel.panel.add(panel);
+		listPanel.panel.add(panel,0);
 	}
 	
 }

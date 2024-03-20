@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import ui.AddElemForm;
 import ui.Layout;
 
@@ -41,7 +43,7 @@ public class Task extends ListElement{
 	}
 	
 	private void createLayout() {
-		Layout stepsLayout = new Layout(400,600,steps);
+		Layout stepsLayout = new Layout(400,600,steps, name, JFrame.DISPOSE_ON_CLOSE);
 		AddElemForm form = stepsLayout.getForm();
 		//button for adding steps
 		ActionListener AddStepBtnListener = new ActionListener() {

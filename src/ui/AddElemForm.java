@@ -13,10 +13,10 @@ public class AddElemForm {
 	
 	public AddElemForm(JPanel listPanel){
 		panel = new JPanel();
-		addButton = new JButton("+");
 		textField = new JTextField(20);
-		panel.add(addButton);
+		addButton = new JButton("+");
 		panel.add(textField);
+		panel.add(addButton);
 	}
 
 	public void addBtnListener(ActionListener btnListener) {

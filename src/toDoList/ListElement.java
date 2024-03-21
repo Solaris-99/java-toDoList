@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -17,12 +19,12 @@ public abstract class ListElement {
 	protected Date date;
 	public JPanel panel;
 	public Date finishDate;
+	public boolean done;
 	
-	public ListElement(String name, List<? extends ListElement> list) {
+	public ListElement(String name, List<? extends ListElement> list)  {
 		this.name = name;
 		this.button = new JButton(name);
-		
-
+		this.done = false;
 		this.delButton = new JButton("X");
 		this.panel = new JPanel();
 		panel.add(button);
@@ -33,11 +35,17 @@ public abstract class ListElement {
 		ActionListener delBtnListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
+				int res = JOptionPane.showOptionDialog(new JFrame(), "¿Deseas borrar este elemento?","Borrar",
+				         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+				         new Object[] { "Sí", "No" }, JOptionPane.YES_OPTION);
+				if(res == JOptionPane.YES_OPTION) {
 				JPanel parentPanel = (JPanel) panel.getParent();
 				list.remove(list.indexOf(element));
 				parentPanel.remove(panel);
 				parentPanel.revalidate();
 				parentPanel.repaint();
+				}
+			
 			}
 		};
 		delButton.addActionListener(delBtnListener);

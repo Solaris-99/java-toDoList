@@ -11,13 +11,15 @@ import ui.Layout;
 
 public class Task extends ListElement{ 
 	private List<Step> steps;
+	private TaskHandler handler;
 	
-	
-	public Task (String name, List<? extends ListElement> list) {
+	public Task (String name, List<? extends ListElement> list, TaskHandler handler) {
 		super(name, list);
+		this.handler = handler;
 		setButtonListener();
 		this.steps = new ArrayList<>();
 	}
+	
 	
 
 	public List<Step> getSteps(){
@@ -26,6 +28,7 @@ public class Task extends ListElement{
 	
 	public void add(Step step) {
 		steps.add(step);
+		handler.saveTasks();
 	}
 	
 	private void setButtonListener() {
@@ -49,12 +52,12 @@ public class Task extends ListElement{
 		ActionListener AddStepBtnListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
-				
 				Step step = new Step(form.textField.getText(), steps);
 				add(step);
 				stepsLayout.addToListPanel(step.panel);
 				form.panel.revalidate();
 				form.panel.repaint();
+				
 			}
 		};
 		stepsLayout.setFormBtnListener(AddStepBtnListener);

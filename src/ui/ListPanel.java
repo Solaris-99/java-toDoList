@@ -20,7 +20,7 @@ public class ListPanel {
 		scrollPane = new JScrollPane(panel);
 		for(ListElement t: list) {
 			
-			panel.add(t.getButton());
+			panel.add(t.panel);
 			
 		}
 		panel.setBorder(new LineBorder(Color.red,5,true)); //debug

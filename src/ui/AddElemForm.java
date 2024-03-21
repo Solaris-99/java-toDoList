@@ -1,27 +1,72 @@
 package ui;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import toDoList.Step;
+import toDoList.Task;
 
-import java.awt.event.ActionListener;
+public class AddElemForm extends JPanel implements ActionListener {
 
-public class AddElemForm {
-	public JPanel panel;
-	public JButton addButton;
-	public JTextField textField;
+	private JButton addButton;
+	private JTextField textField;
+	private JPanel panelToAdd;
+	private List<Task> list;
+	private Task task;
 	
-	public AddElemForm(JPanel listPanel){
-		panel = new JPanel();
+	
+	public AddElemForm(JPanel panelToAdd, List<Task> list){
+		this.panelToAdd = panelToAdd;
+		this.list = list;
 		textField = new JTextField(20);
 		addButton = new JButton("+");
-		panel.add(textField);
-		panel.add(addButton);
-	}
-
-	public void addBtnListener(ActionListener btnListener) {
-		addButton.addActionListener(btnListener);
+		add(textField);
+		addButton.addActionListener(this);
+		add(addButton);
 	}
 	
+	public AddElemForm(JPanel panelToAdd, Task task){
+		this.panelToAdd = panelToAdd;
+		this.task = task;
+		textField = new JTextField(20);
+		addButton = new JButton("+");
+		add(textField);
+		addButton.addActionListener(this);
+		add(addButton);
+	}
+	
+	public String getText() {
+		return textField.getText();
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		ListElementPanel elemPanel;
+		if(list != null) {
+			 Task elem = new Task(this.getText());
+			 list.add(0, elem);
+			 elemPanel = new ListElementPanel(elem,list);
+			 System.out.println("added task");
+			 System.out.println(list.toString());
+		}
+		else {
+			Step elem = new Step(this.getText());
+			task.addStep(elem);
+			elemPanel = new ListElementPanel(elem,task.getSteps());
+			System.out.println("added step");
+
+		}
+		
+		panelToAdd.add(elemPanel,0);
+		panelToAdd.revalidate();
+		panelToAdd.repaint();
+		
+		
+		
+//		panelToAdd.add();
+	}
 	
 }

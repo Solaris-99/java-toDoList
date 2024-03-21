@@ -1,72 +1,48 @@
 package toDoList;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
+import java.util.Date;
 
 public abstract class ListElement {
-	protected JButton button;
-	protected JButton delButton;
-	protected String name;
-	protected Date date;
-	public JPanel panel;
-	public Date finishDate;
-	public boolean done;
+	private Date creationDate, finishDate;
+	private boolean finished;
+	private String name;
 	
-	public ListElement(String name, List<? extends ListElement> list)  {
+	public ListElement(String name) {
 		this.name = name;
-		this.button = new JButton(name);
-		this.done = false;
-		this.delButton = new JButton("X");
-		this.panel = new JPanel();
-		panel.add(button);
-		panel.add(delButton);
-		this.date = new Date();
-		ListElement element = this;
-		
-		ActionListener delBtnListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				int res = JOptionPane.showOptionDialog(new JFrame(), "¿Deseas borrar este elemento?","Borrar",
-				         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-				         new Object[] { "Sí", "No" }, JOptionPane.YES_OPTION);
-				if(res == JOptionPane.YES_OPTION) {
-				JPanel parentPanel = (JPanel) panel.getParent();
-				list.remove(list.indexOf(element));
-				parentPanel.remove(panel);
-				parentPanel.revalidate();
-				parentPanel.repaint();
-				}
-			
-			}
-		};
-		delButton.addActionListener(delBtnListener);
+		creationDate = new Date();
+		finished = false;
+	}
 
-		button.setPreferredSize(new Dimension(300,30));
-		panel.setMaximumSize(new Dimension(400, 50));;
-		panel.setBorder(new LineBorder(Color.red,5,true)); //debug
+	public Date getFinishDate() {
+		return finishDate;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+		if(finished) {
+			finishDate = new Date();
+		}
+		else {
+			finishDate = null;
+		}
 		
 		
 	}
-	
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
 	public String getName() {
-		return this.name;
+		return name;
 	}
 	
-	public JButton getButton(){
-		return this.button;
-	}
 	
-	public Date getDate() {
-		return this.date;
-	}
+	
+	
 	
 }

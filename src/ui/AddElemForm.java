@@ -5,8 +5,9 @@ import javax.swing.JTextField;
 
 
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class AddElemForm {
+public class AddElemForm implements Serializable{
 	public JPanel panel;
 	public JButton addButton;
 	public JTextField textField;

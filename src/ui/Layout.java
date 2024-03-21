@@ -2,6 +2,7 @@ package ui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -10,7 +11,7 @@ import javax.swing.JPanel;
 import toDoList.ListElement;
 
 
-public class Layout {
+public class Layout implements Serializable {
 	private JFrame jframe;
 	private AddElemForm form;
 	private ListPanel listPanel;

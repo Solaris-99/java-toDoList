@@ -1,6 +1,7 @@
 package toDoList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import javax.swing.JFrame;
 import ui.AddElemForm;
 import ui.Layout;
 
-public class Task extends ListElement{ 
+public class Task extends ListElement implements Serializable{ 
 	private List<Step> steps;
 	private TaskHandler handler;
 	

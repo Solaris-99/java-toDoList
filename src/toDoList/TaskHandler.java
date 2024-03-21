@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import javax.swing.JFrame;
 import ui.AddElemForm;
 import ui.Layout;
 
-public class TaskHandler  {
+public class TaskHandler  implements Serializable{
 	
 	List<Task> tasks;
 	Layout layout;
@@ -52,7 +53,11 @@ public class TaskHandler  {
 	
 	public void saveTasks() {
 		//TODO
-		//actual save logic
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(TASKS_FILE))) {
+            outputStream.writeObject(tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	private void loadTasks() {
@@ -60,7 +65,12 @@ public class TaskHandler  {
 		File file = new File(TASKS_FILE);
 		if (file.exists()) {
 			//TODO
-			// actual load logic
+			try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file))) {
+                tasks = (List<Task>) inputStream.readObject();
+                System.out.println("Tasks loaded");
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 		}
 		this.tasks = tasks;
 	}

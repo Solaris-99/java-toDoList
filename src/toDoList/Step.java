@@ -4,11 +4,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 
-public class Step extends ListElement{
+public class Step extends ListElement implements Serializable{
 	
 	
 	public Step(String description, List<? extends ListElement> list) {

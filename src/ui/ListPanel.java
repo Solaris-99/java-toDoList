@@ -1,5 +1,6 @@
 package ui;
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -9,7 +10,7 @@ import javax.swing.border.LineBorder;
 
 import toDoList.ListElement;
 
-public class ListPanel {
+public class ListPanel implements Serializable{
 	
 	public JPanel panel;
 	private JScrollPane scrollPane;

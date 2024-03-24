@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -30,8 +31,18 @@ public class ListElementPanel extends JPanel {
 		add(delButton);
 	}
 	
+	public ElementButton getElementButton() {
+		return elementButton;
+	}
 	
+	public void setFinishDate(Date date) {
+		String s = date.toString();
+		finishDatePanel.setText(s);
+	}
 	
+	public void clearFinishDate() {
+		finishDatePanel.setText("P");
+	}
 	
 	
 }

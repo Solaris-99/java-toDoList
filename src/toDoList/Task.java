@@ -2,6 +2,9 @@ package toDoList;
 import java.util.ArrayList;
 import java.util.List;
 
+import ui.ElementButton;
+import ui.ListElementPanel;
+
 public class Task extends ListElement{ 
 	private List<Step> steps;
 	
@@ -25,6 +28,17 @@ public class Task extends ListElement{
 	@Override
 	public String toString() {
 		return this.getName();
+	}
+	
+	public boolean checkIsFinished() {
+		for (Step s: steps) {
+			if(!s.isFinished()) {
+				this.setFinished(false);
+				return this.isFinished();
+			}
+		}
+		this.setFinished(true);
+		return this.isFinished();
 	}
 	
 

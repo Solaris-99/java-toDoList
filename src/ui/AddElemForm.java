@@ -43,19 +43,28 @@ public class AddElemForm extends JPanel implements ActionListener {
 		return textField.getText();
 	}
 	
+	//adding tasks/steps
 	public void actionPerformed(ActionEvent e) {
 		ListElementPanel elemPanel;
 		if(list != null) {
+			 //adding a task
 			 Task elem = new Task(this.getText());
 			 list.add(0, elem);
 			 elemPanel = new ListElementPanel(elem,list);
+			 
+			 elem.setPanel(elemPanel);
+			 
 			 System.out.println("added task");
 			 System.out.println(list.toString());
 		}
 		else {
-			Step elem = new Step(this.getText());
+			//adding a step
+			Step elem = new Step(this.getText(), task);
 			task.addStep(elem);
 			elemPanel = new ListElementPanel(elem,task.getSteps());
+			
+			elem.setPanel(elemPanel);
+			
 			System.out.println("added step");
 
 		}

@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.swing.JButton;
 
 import toDoList.ListElement;
+import toDoList.Step;
 import toDoList.Task;
 
 public class ElementButton extends JButton implements ActionListener{
@@ -18,6 +19,10 @@ public class ElementButton extends JButton implements ActionListener{
 		super(elem.getName());
 		this.elem = elem;
 		this.addActionListener(this);
+		if(elem instanceof Task) {
+			Task task = (Task) elem;
+		}
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -29,11 +34,24 @@ public class ElementButton extends JButton implements ActionListener{
 			isFinished = !isFinished;
 			Font font = new Font("helvetica", Font.BOLD, 12);
 			Font newFont = font;
+			Step step = (Step) elem;
+			Task task = step.getTask();
+			ElementButton taskButton = task.getPanel().getElementButton();
+			
 			if(isFinished) {
+				boolean taskFinished = task.checkIsFinished();
 				Map  attributes = font.getAttributes();
 				attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
 				newFont = new Font(attributes);
+				if(taskFinished) {
+					taskButton.setFont(newFont);
+				}
 			}
+			else {
+				taskButton.setFont(newFont);
+				task.setFinished(false);
+			}
+			
 			this.setFont(newFont);
 		}
 	}

@@ -9,19 +9,24 @@ import javax.swing.JTextField;
 
 import toDoList.Step;
 import toDoList.Task;
+import toDoList.TaskHandler;
 
 public class AddElemForm extends JPanel implements ActionListener {
 
 	private JButton addButton;
 	private JTextField textField;
 	private JPanel panelToAdd;
+	private TaskHandler handler;
 	private List<Task> list;
 	private Task task;
 	
 	
-	public AddElemForm(JPanel panelToAdd, List<Task> list){
+	public AddElemForm(JPanel panelToAdd, TaskHandler handler){
 		this.panelToAdd = panelToAdd;
-		this.list = list;
+		
+		this.handler = handler;
+		this.list = handler.getTasks();
+		
 		textField = new JTextField(20);
 		addButton = new JButton("+");
 		add(textField);
@@ -29,9 +34,12 @@ public class AddElemForm extends JPanel implements ActionListener {
 		add(addButton);
 	}
 	
-	public AddElemForm(JPanel panelToAdd, Task task){
+	public AddElemForm(JPanel panelToAdd, TaskHandler handler, Task task){
 		this.panelToAdd = panelToAdd;
+		
+		this.handler = handler;
 		this.task = task;
+		
 		textField = new JTextField(20);
 		addButton = new JButton("+");
 		add(textField);
@@ -50,9 +58,11 @@ public class AddElemForm extends JPanel implements ActionListener {
 			 //adding a task
 			 Task elem = new Task(this.getText());
 			 list.add(0, elem);
-			 elemPanel = new ListElementPanel(elem,list);
+			 
+			 elemPanel = new ListElementPanel(elem,list,handler);
 			 
 			 elem.setPanel(elemPanel);
+			//add save functionality
 			 
 			 System.out.println("added task");
 			 System.out.println(list.toString());
@@ -61,14 +71,15 @@ public class AddElemForm extends JPanel implements ActionListener {
 			//adding a step
 			Step elem = new Step(this.getText(), task);
 			task.addStep(elem);
-			elemPanel = new ListElementPanel(elem,task.getSteps());
+			
+			elemPanel = new ListElementPanel(elem,task.getSteps(),handler);
 			
 			elem.setPanel(elemPanel);
 			
 			System.out.println("added step");
 
 		}
-		
+		handler.saveTasks();
 		panelToAdd.add(elemPanel,0);
 		panelToAdd.revalidate();
 		panelToAdd.repaint();

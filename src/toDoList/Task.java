@@ -1,11 +1,12 @@
 package toDoList;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import ui.ElementButton;
 import ui.ListElementPanel;
 
-public class Task extends ListElement{ 
+public class Task extends ListElement implements Serializable{ 
 	private List<Step> steps;
 	
 	public Task(String name) {

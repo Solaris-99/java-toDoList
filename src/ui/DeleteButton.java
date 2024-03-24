@@ -8,15 +8,18 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import toDoList.ListElement;
+import toDoList.TaskHandler;
 
 public class DeleteButton extends JButton implements ActionListener{
 	ListElement elem;
 	List<? extends ListElement> list;
+	TaskHandler handler;
 	
-	public DeleteButton(ListElement elem, List<? extends ListElement> list) {
+	public DeleteButton(ListElement elem, List<? extends ListElement> list, TaskHandler handler) {
 		super("X");
 		this.elem = elem;
 		this.list = list;
+		this.handler = handler;
 		this.addActionListener(this);
 	}
 	
@@ -29,6 +32,7 @@ public class DeleteButton extends JButton implements ActionListener{
 		grandPPanel.repaint();
 		System.out.println("deleted");
 		System.out.println(list.toString());
+		handler.saveTasks();
 	}
 	
 }

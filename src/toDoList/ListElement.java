@@ -1,10 +1,11 @@
 package toDoList;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import ui.ListElementPanel;
 
-public abstract class ListElement {
+public abstract class ListElement implements Serializable {
 	private Date creationDate, finishDate;
 	private boolean finished;
 	private String name;
@@ -34,7 +35,7 @@ public abstract class ListElement {
 		}
 		else {
 			finishDate = null;
-			panel.clearFinishDate();
+			if(panel!= null) { panel.clearFinishDate();}
 		}
 	}
 

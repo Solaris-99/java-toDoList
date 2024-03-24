@@ -11,14 +11,17 @@ import javax.swing.JButton;
 import toDoList.ListElement;
 import toDoList.Step;
 import toDoList.Task;
+import toDoList.TaskHandler;
 
 public class ElementButton extends JButton implements ActionListener{
 	private ListElement elem;
+	private TaskHandler handler;
 	
-	public ElementButton(ListElement elem) {
+	public ElementButton(ListElement elem, TaskHandler handler) {
 		super(elem.getName());
 		this.elem = elem;
 		this.addActionListener(this);
+		this.handler = handler;
 		if(elem instanceof Task) {
 			Task task = (Task) elem;
 		}
@@ -27,7 +30,7 @@ public class ElementButton extends JButton implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if(this.elem instanceof Task) {
-			Layout taskLayout = new Layout((Task) elem);
+			Layout taskLayout = new Layout((Task) elem, handler);
 		}else {
 			boolean isFinished = elem.isFinished();
 			elem.setFinished(!isFinished);
@@ -54,6 +57,7 @@ public class ElementButton extends JButton implements ActionListener{
 			
 			this.setFont(newFont);
 		}
+		handler.saveTasks();
 	}
 	
 	

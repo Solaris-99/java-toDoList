@@ -62,7 +62,6 @@ public class AddElemForm extends JPanel implements ActionListener {
 			 elemPanel = new ListElementPanel(elem,list,handler);
 			 
 			 elem.setPanel(elemPanel);
-			//add save functionality
 			 
 			 System.out.println("added task");
 			 System.out.println(list.toString());
@@ -71,6 +70,7 @@ public class AddElemForm extends JPanel implements ActionListener {
 			//adding a step
 			Step elem = new Step(this.getText(), task);
 			task.addStep(elem);
+			task.setFinished(false);
 			
 			elemPanel = new ListElementPanel(elem,task.getSteps(),handler);
 			
@@ -82,11 +82,8 @@ public class AddElemForm extends JPanel implements ActionListener {
 		handler.saveTasks();
 		panelToAdd.add(elemPanel,0);
 		panelToAdd.revalidate();
-		panelToAdd.repaint();
-		
-		
-		
-//		panelToAdd.add();
-	}
+		panelToAdd.repaint();	
+	}	
+	
 	
 }

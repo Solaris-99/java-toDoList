@@ -30,12 +30,18 @@ public abstract class ListElement implements Serializable {
 		if(finished) {
 			finishDate = new Date();
 			
-			if(panel!= null) { panel.setFinishDate(finishDate);}
+			if(panel!= null) { 
+				System.out.println("marking as finished...");
+				panel.setFinished(finishDate);
+				}
 			
 		}
 		else {
 			finishDate = null;
-			if(panel!= null) { panel.clearFinishDate();}
+			if(panel!= null) { 
+				System.out.println("marking as unfinished...");
+				panel.clearFinishState();
+				}
 		}
 	}
 

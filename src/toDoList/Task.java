@@ -38,6 +38,7 @@ public class Task extends ListElement implements Serializable{
 				return this.isFinished();
 			}
 		}
+		System.out.println("task finished");
 		this.setFinished(true);
 		return this.isFinished();
 	}

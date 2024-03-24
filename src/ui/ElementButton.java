@@ -1,10 +1,8 @@
 package ui;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.TextAttribute;
-import java.util.Map;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 
@@ -13,7 +11,7 @@ import toDoList.Step;
 import toDoList.Task;
 import toDoList.TaskHandler;
 
-public class ElementButton extends JButton implements ActionListener{
+public class ElementButton extends JButton implements ActionListener, Serializable{
 	private ListElement elem;
 	private TaskHandler handler;
 	
@@ -31,34 +29,21 @@ public class ElementButton extends JButton implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(this.elem instanceof Task) {
 			Layout taskLayout = new Layout((Task) elem, handler);
-		}else {
+		}
+		else {
+			//step
+			System.out.println("step actioned");
 			boolean isFinished = elem.isFinished();
-			elem.setFinished(!isFinished);
 			isFinished = !isFinished;
-			Font font = new Font("helvetica", Font.BOLD, 12);
-			Font newFont = font;
+			elem.setFinished(isFinished);
+			
 			Step step = (Step) elem;
 			Task task = step.getTask();
-			ElementButton taskButton = task.getPanel().getElementButton();
+			System.out.println("Checking for task...");
+			task.checkIsFinished();	
 			
-			if(isFinished) {
-				boolean taskFinished = task.checkIsFinished();
-				Map  attributes = font.getAttributes();
-				attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
-				newFont = new Font(attributes);
-				if(taskFinished) {
-					taskButton.setFont(newFont);
-				}
-			}
-			else {
-				taskButton.setFont(newFont);
-				task.setFinished(false);
-			}
-			
-			this.setFont(newFont);
 		}
 		handler.saveTasks();
 	}
-	
 	
 }

@@ -15,7 +15,7 @@ import toDoList.TaskHandler;
 
 public class ListElementPanel extends JPanel implements Serializable {
 	
-	private final Font defFont = new Font("helvetica", Font.BOLD, 12);
+	private final Font DEF_FONT = new Font("helvetica", Font.BOLD, 12);
 	private Font doneFont;
 	private JLabel creationDatePanel, finishDatePanel;
 	private ElementButton elementButton;
@@ -25,22 +25,21 @@ public class ListElementPanel extends JPanel implements Serializable {
 		creationDatePanel = new JLabel(elem.getCreationDate().toString());
 		elementButton = new ElementButton(elem, handler);
 		delButton = new DeleteButton(elem,list, handler);
-		if(elem.isFinished()) {
-			finishDatePanel = new JLabel(elem.getFinishDate().toString());
-		}
-		else {
-			finishDatePanel = new JLabel("P");
-		}
+		finishDatePanel = new JLabel();
 		add(creationDatePanel);
 		add(elementButton);
 		add(finishDatePanel);
 		add(delButton);
-		
+		setDoneFont();
 		if(elem.isFinished()) {
 			setFinished(elem.getFinishDate());
 		}
+		else {
+			clearFinishState();
+		}
 		
-		setDoneFont();
+		
+		
 	}
 	
 	public ElementButton getElementButton() {
@@ -50,7 +49,7 @@ public class ListElementPanel extends JPanel implements Serializable {
 	public void clearFinishState() {
 		System.out.println("Clearing panel finish state..");
 		finishDatePanel.setText("P");
-		elementButton.setFont(defFont);
+		elementButton.setFont(DEF_FONT);
 	}
 	
 	public void setFinished(Date date) {
@@ -61,7 +60,7 @@ public class ListElementPanel extends JPanel implements Serializable {
 	}
 	
 	private void setDoneFont() {
-		Map attributes = defFont.getAttributes();
+		Map attributes = DEF_FONT.getAttributes();
 		attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
 		doneFont = new Font(attributes);
 	}

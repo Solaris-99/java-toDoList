@@ -1,62 +1,57 @@
 package ui;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import toDoList.ListElement;
+import toDoList.Step;
+import toDoList.Task;
+import toDoList.TaskHandler;
 
 
-public class Layout implements Serializable {
-	private JFrame jframe;
+public class Layout extends JFrame implements Serializable {
+
 	private AddElemForm form;
-	private ListPanel listPanel;
+	
+	public Layout(TaskHandler handler) {
+		List<Task> tasks = handler.getTasks();
 
-	//add layout manager
-	
-	public Layout(int w, int h, List<? extends ListElement> elemList, String title, int closeOperation) {
-		jframe = new JFrame();
-		Container pane = jframe.getContentPane();
-		
-		listPanel = new ListPanel(elemList);
-		
-		form = new AddElemForm(listPanel.panel);
-	
-		pane.setLayout(new BorderLayout());
-		
-		jframe.setBounds(25, 25, w, h);
-		jframe.setTitle(title);
-		jframe.setDefaultCloseOperation(closeOperation);
-		pane.add(form.panel,BorderLayout.NORTH);
-		pane.add(listPanel.panel,BorderLayout.CENTER);
-		jframe.setVisible(true);
+		setLayout(new BorderLayout());
+		JPanel tasksPanel = new JPanel();
+		form = new AddElemForm(tasksPanel,handler);
+		add(form, BorderLayout.NORTH);
+		for(Task t: tasks) {
+			ListElementPanel ePanel = new ListElementPanel(t,tasks,handler);
+			t.setPanel(ePanel);
+			tasksPanel.add(ePanel);
+		}
+		setBounds(50,50, 400, 600);
+		setTitle("To-Do List");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		add(tasksPanel, BorderLayout.CENTER);
+		setVisible(true);
 		
 	}
 	
-	public void setFormBtnListener(ActionListener btnListener) {
-		form.addButton.addActionListener(btnListener);
-	}
-	
-	public AddElemForm getForm() {
-		return form;
-	}
-	
-	
-	public JFrame getJFrame() {
-		return this.jframe;
-	}
-	
-	public void update() {
-		jframe.revalidate();
-		jframe.repaint();
-	}
-	
-	public void addToListPanel(JPanel panel) {
-		listPanel.panel.add(panel,0);
+	public Layout(Task task, TaskHandler handler) {
+		
+		setLayout(new BorderLayout());
+		JPanel tasksPanel = new JPanel();
+		form = new AddElemForm(tasksPanel,handler,task);
+		add(form, BorderLayout.NORTH);
+		List<Step> steps = task.getSteps();
+ 		for(Step t: steps) {
+			ListElementPanel ePanel = new ListElementPanel(t,steps,handler);
+			t.setPanel(ePanel);
+			tasksPanel.add(ePanel);
+		}
+		setBounds(50,50, 400, 600);
+		setTitle("To-Do List");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		add(tasksPanel, BorderLayout.CENTER);
+		setVisible(true);
 	}
 	
 }

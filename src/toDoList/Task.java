@@ -1,10 +1,12 @@
 package toDoList;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import ui.ElementButton;
-import ui.ListElementPanel;
+import java.util.Date;
+import java.text.DateFormat;
+import java.util.Locale;
 
 public class Task extends ListElement implements Serializable{ 
 	private List<Step> steps;
@@ -12,6 +14,20 @@ public class Task extends ListElement implements Serializable{
 	public Task(String name) {
 		super(name);
 		steps = new ArrayList<Step>();
+	}
+
+	public Task(String name, String creationDate,String finishDate){
+		super(name);
+		Date created;
+		try{
+			created = DATE_FORMATTER.parse(creationDate);
+		}
+		catch(ParseException e){
+			throw new RuntimeException(e);
+		}
+		this.setCreationDate(created);
+		this.setFinished(finishDate);
+		this.steps = new ArrayList<Step>();
 	}
 
 	public List<Step> getSteps() {
@@ -28,7 +44,17 @@ public class Task extends ListElement implements Serializable{
 	
 	@Override
 	public String toString() {
-		return this.getName();
+		String selfString = super.toString();
+		String stepsStrings = "";
+		if(!steps.isEmpty()) {
+			for (Step s : steps) {
+				stepsStrings = stepsStrings + s +",";
+			}
+		}
+		
+		selfString = selfString + ">:"+stepsStrings + ";";
+		
+		return selfString;
 	}
 	
 	public boolean checkIsFinished() {

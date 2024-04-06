@@ -33,6 +33,7 @@ public class DeleteButton extends JButton implements ActionListener{
 		System.out.println("deleted");
 		System.out.println(list.toString());
 		handler.saveTasks();
+		handler.saveData();
 	}
 	
 }

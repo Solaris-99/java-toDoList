@@ -44,6 +44,7 @@ public class ElementButton extends JButton implements ActionListener, Serializab
 			
 		}
 		handler.saveTasks();
+		handler.saveData();
 	}
 	
 }

@@ -71,7 +71,7 @@ public class AddElemForm extends JPanel implements ActionListener {
 			Step elem = new Step(this.getText(), task);
 			task.addStep(elem);
 			task.setFinished(false);
-			
+			System.out.println(task);
 			elemPanel = new ListElementPanel(elem,task.getSteps(),handler);
 			
 			elem.setPanel(elemPanel);
@@ -80,6 +80,7 @@ public class AddElemForm extends JPanel implements ActionListener {
 
 		}
 		handler.saveTasks();
+		handler.saveData();
 		panelToAdd.add(elemPanel,0);
 		panelToAdd.revalidate();
 		panelToAdd.repaint();	

@@ -2,7 +2,6 @@ package ui;
 import java.awt.BorderLayout;
 import java.io.Serializable;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -23,7 +22,9 @@ public class Layout extends JFrame implements Serializable {
 		form = new AddElemForm(tasksPanel,handler);
 		add(form, BorderLayout.NORTH);
 		for(Task t: tasks) {
-			tasksPanel.add(new ListElementPanel(t,tasks,handler));
+			ListElementPanel ePanel = new ListElementPanel(t,tasks,handler);
+			t.setPanel(ePanel);
+			tasksPanel.add(ePanel);
 		}
 		setBounds(50,50, 400, 600);
 		setTitle("To-Do List");
@@ -41,7 +42,9 @@ public class Layout extends JFrame implements Serializable {
 		add(form, BorderLayout.NORTH);
 		List<Step> steps = task.getSteps();
  		for(Step t: steps) {
-			tasksPanel.add(new ListElementPanel(t,steps,handler));
+			 ListElementPanel ePanel = new ListElementPanel(t,steps,handler);
+			 t.setPanel(ePanel);
+			 tasksPanel.add(ePanel);
 		}
 		setBounds(50,50, 400, 600);
 		setTitle("To-Do List");

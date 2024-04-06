@@ -17,14 +17,13 @@ public class ListElementPanel extends JPanel implements Serializable {
 	
 	private final Font DEF_FONT = new Font("helvetica", Font.BOLD, 12);
 	private Font doneFont;
-	private JLabel creationDatePanel, finishDatePanel;
-	private ElementButton elementButton;
-	private DeleteButton delButton;
-	
-	public ListElementPanel(ListElement elem, List<? extends ListElement> list, TaskHandler handler) {
-		creationDatePanel = new JLabel(elem.getCreationDate().toString());
+    final private JLabel finishDatePanel;
+	final private ElementButton elementButton;
+
+    public ListElementPanel(ListElement elem, List<? extends ListElement> list, TaskHandler handler) {
+        JLabel creationDatePanel = new JLabel(elem.getCreationDate().toString());
 		elementButton = new ElementButton(elem, handler);
-		delButton = new DeleteButton(elem,list, handler);
+        DeleteButton delButton = new DeleteButton(elem, list, handler);
 		finishDatePanel = new JLabel();
 		add(creationDatePanel);
 		add(elementButton);

@@ -3,10 +3,11 @@ package ui;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+import java.text.DateFormat;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,15 +17,15 @@ import toDoList.TaskHandler;
 public class ListElementPanel extends JPanel implements Serializable {
 	
 	private final Font DEF_FONT = new Font("helvetica", Font.BOLD, 12);
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm dd/MM/yyyy");
 	private Font doneFont;
-	private JLabel creationDatePanel, finishDatePanel;
-	private ElementButton elementButton;
-	private DeleteButton delButton;
-	
-	public ListElementPanel(ListElement elem, List<? extends ListElement> list, TaskHandler handler) {
-		creationDatePanel = new JLabel(elem.getCreationDate().toString());
+    private final JLabel finishDatePanel;
+	private final ElementButton elementButton;
+
+    public ListElementPanel(ListElement elem, List<? extends ListElement> list, TaskHandler handler) {
+        JLabel creationDatePanel = new JLabel(DATE_FORMAT.format(elem.getCreationDate()));
 		elementButton = new ElementButton(elem, handler);
-		delButton = new DeleteButton(elem,list, handler);
+        DeleteButton delButton = new DeleteButton(elem, list, handler);
 		finishDatePanel = new JLabel();
 		add(creationDatePanel);
 		add(elementButton);
@@ -37,8 +38,6 @@ public class ListElementPanel extends JPanel implements Serializable {
 		else {
 			clearFinishState();
 		}
-		
-		
 		
 	}
 	
@@ -54,7 +53,8 @@ public class ListElementPanel extends JPanel implements Serializable {
 	
 	public void setFinished(Date date) {
 		System.out.println("Setting panel finish state..");
-		String s = date.toString();
+
+		String s = DATE_FORMAT.format(date);
 		finishDatePanel.setText(s);
 		elementButton.setFont(doneFont);
 	}
@@ -64,9 +64,5 @@ public class ListElementPanel extends JPanel implements Serializable {
 		attributes.put(TextAttribute.STRIKETHROUGH, TextAttribute.STRIKETHROUGH_ON);
 		doneFont = new Font(attributes);
 	}
-	
-	
-	
-	
 	
 }

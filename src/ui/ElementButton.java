@@ -31,6 +31,7 @@ public class ElementButton extends JButton implements ActionListener, Serializab
 	public void actionPerformed(ActionEvent e) {
 		if(this.elem instanceof Task) {
 			Layout taskLayout = new Layout((Task) elem, handler);
+			//TODO: open steps in same layout; go back to tasks button
 		}
 		else {
 			//step
@@ -42,8 +43,7 @@ public class ElementButton extends JButton implements ActionListener, Serializab
 			Step step = (Step) elem;
 			Task task = step.getTask();
 			System.out.println("Checking for task...");
-			task.checkIsFinished();	
-			
+			task.checkIsFinished();
 		}
 		handler.saveTasks();
 	}

@@ -12,7 +12,7 @@ import toDoList.TaskHandler;
 
 
 public class Layout extends JFrame implements Serializable {
-
+	private static Layout taskLayout;
 	private final AddElemForm form;
 	
 	public Layout(TaskHandler handler) {
@@ -28,14 +28,15 @@ public class Layout extends JFrame implements Serializable {
 			t.setPanel(ePanel);
 			tasksPanel.add(ePanel);
 		}
-		setBounds(50,50, 400, 600);
+		setSize(400, 600);
+		setLocationRelativeTo(null);
 		setTitle("To-Do List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(tasksPanel, BorderLayout.CENTER);
 
 
 		setVisible(true);
-		
+		Layout.taskLayout = this;
 	}
 	
 	public Layout(Task task, TaskHandler handler) {
@@ -50,7 +51,8 @@ public class Layout extends JFrame implements Serializable {
 			t.setPanel(ePanel);
 			tasksPanel.add(ePanel);
 		}
-		setBounds(50,50, 400, 600);
+		setLocation(Layout.taskLayout.getX()+400,Layout.taskLayout.getY());
+		setSize(400, 600);
 		setTitle("To-Do List");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		add(tasksPanel, BorderLayout.CENTER);

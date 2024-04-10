@@ -12,8 +12,6 @@ public class Run {
 
 	
 	public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		// TODO Auto-generated method stub
-
 
 		UIManager.put("nimbusBase", DarkColor.BACKGROUND);
 		UIManager.put("nimbusBlueGrey", DarkColor.ACTIVE_BUTTON);

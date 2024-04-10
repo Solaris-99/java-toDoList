@@ -1,5 +1,5 @@
 package ui;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,13 +13,14 @@ import toDoList.TaskHandler;
 
 public class Layout extends JFrame implements Serializable {
 
-	private AddElemForm form;
+	private final AddElemForm form;
 	
 	public Layout(TaskHandler handler) {
 		List<Task> tasks = handler.getTasks();
 
 		setLayout(new BorderLayout());
 		JPanel tasksPanel = new JPanel();
+
 		form = new AddElemForm(tasksPanel,handler);
 		add(form, BorderLayout.NORTH);
 		for(Task t: tasks) {
@@ -31,6 +32,8 @@ public class Layout extends JFrame implements Serializable {
 		setTitle("To-Do List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(tasksPanel, BorderLayout.CENTER);
+
+
 		setVisible(true);
 		
 	}

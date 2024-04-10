@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -23,7 +24,8 @@ public class ElementButton extends JButton implements ActionListener, Serializab
 		if(elem instanceof Task) {
 			Task task = (Task) elem;
 		}
-		
+		this.setForeground(DarkColor.TEXT_DARK);
+		this.setPreferredSize(new Dimension(200,30));
 	}
 	
 	public void actionPerformed(ActionEvent e) {

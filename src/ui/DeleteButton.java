@@ -1,11 +1,11 @@
 package ui;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import toDoList.ListElement;
 import toDoList.TaskHandler;
@@ -21,9 +21,13 @@ public class DeleteButton extends JButton implements ActionListener{
 		this.list = list;
 		this.handler = handler;
 		this.addActionListener(this);
+		this.setForeground(DarkColor.TEXT_DARKEST);
+		this.setBackground(DarkColor.ERASE);
 	}
+
 	
 	public void actionPerformed(ActionEvent e){
+
 		JPanel parentPanel = (JPanel) this.getParent();
 		JPanel grandPPanel = (JPanel) parentPanel.getParent();
 		list.remove(elem);

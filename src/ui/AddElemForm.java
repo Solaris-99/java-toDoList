@@ -3,20 +3,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import toDoList.Step;
 import toDoList.Task;
 import toDoList.TaskHandler;
 
 public class AddElemForm extends JPanel implements ActionListener {
-
-	private JButton addButton;
-	private JTextField textField;
-	private JPanel panelToAdd;
-	private TaskHandler handler;
+	private final JButton addButton;
+	private final JTextField textField;
+	private final JPanel panelToAdd;
+	private final TaskHandler handler;
 	private List<Task> list;
 	private Task task;
 	
@@ -32,6 +29,7 @@ public class AddElemForm extends JPanel implements ActionListener {
 		add(textField);
 		addButton.addActionListener(this);
 		add(addButton);
+		addButton.setForeground(DarkColor.TEXT_DARK);
 	}
 	
 	public AddElemForm(JPanel panelToAdd, TaskHandler handler, Task task){

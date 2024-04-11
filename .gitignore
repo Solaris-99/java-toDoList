@@ -3,3 +3,5 @@ tasks.txt
 toDoList.iml
 .idea/
 .settings/
+.classes/
+.bin/

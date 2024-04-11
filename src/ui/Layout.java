@@ -53,7 +53,7 @@ public class Layout extends JFrame implements Serializable {
 		}
 		setLocation(Layout.taskLayout.getX()+400,Layout.taskLayout.getY());
 		setSize(400, 600);
-		setTitle("To-Do List");
+		setTitle(task.getName());
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		add(tasksPanel, BorderLayout.CENTER);
 		setVisible(true);

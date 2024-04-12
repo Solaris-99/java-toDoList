@@ -3,8 +3,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import toDoList.Step;
 import toDoList.Task;
@@ -17,12 +16,16 @@ public class Layout extends JFrame implements Serializable {
 	
 	public Layout(TaskHandler handler) {
 		List<Task> tasks = handler.getTasks();
-
 		setLayout(new BorderLayout());
 		JPanel tasksPanel = new JPanel();
-
+		Header colHeader = new Header();
 		form = new AddElemForm(tasksPanel,handler);
-		add(form, BorderLayout.NORTH);
+		JPanel topPanel = new JPanel();
+		topPanel.add(form);
+		topPanel.add(colHeader);
+		BoxLayout topPanelLayout = new BoxLayout(topPanel,BoxLayout.Y_AXIS);
+		topPanel.setLayout(topPanelLayout);
+		add(topPanel, BorderLayout.NORTH);
 		for(Task t: tasks) {
 			ListElementPanel ePanel = new ListElementPanel(t,tasks,handler);
 			t.setPanel(ePanel);
@@ -33,8 +36,6 @@ public class Layout extends JFrame implements Serializable {
 		setTitle("To-Do List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		add(tasksPanel, BorderLayout.CENTER);
-
-
 		setVisible(true);
 		Layout.taskLayout = this;
 	}
@@ -43,8 +44,13 @@ public class Layout extends JFrame implements Serializable {
 		
 		setLayout(new BorderLayout());
 		JPanel tasksPanel = new JPanel();
-		form = new AddElemForm(tasksPanel,handler,task);
-		add(form, BorderLayout.NORTH);
+		Header colHeader = new Header();
+		form = new AddElemForm(tasksPanel,handler);
+		JPanel topPanel = new JPanel();
+		topPanel.add(form);
+		topPanel.add(colHeader);
+		BoxLayout topPanelLayout = new BoxLayout(topPanel,BoxLayout.Y_AXIS);
+		topPanel.setLayout(topPanelLayout);
 		List<Step> steps = task.getSteps();
  		for(Step t: steps) {
 			ListElementPanel ePanel = new ListElementPanel(t,steps,handler);

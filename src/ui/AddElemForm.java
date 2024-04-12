@@ -27,6 +27,7 @@ public class AddElemForm extends JPanel implements ActionListener {
 
         textField = new JTextField(20);
         addButton = new JButton("+");
+        textField.addActionListener(this);
         add(textField);
         addButton.addActionListener(this);
         add(addButton);
@@ -82,6 +83,7 @@ public class AddElemForm extends JPanel implements ActionListener {
             System.out.println("added step");
 
         }
+        this.textField.setText("");
         handler.saveTasks();
         panelToAdd.add(elemPanel, 0);
         panelToAdd.revalidate();

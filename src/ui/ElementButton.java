@@ -4,8 +4,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
+import java.util.Arrays;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
 import toDoList.ListElement;
 import toDoList.Step;
@@ -17,7 +18,11 @@ public class ElementButton extends JButton implements ActionListener, Serializab
 	private TaskHandler handler;
 	
 	public ElementButton(ListElement elem, TaskHandler handler) {
-		super(elem.getName());
+		super(prepareText(elem.getName()));
+		int height = Math.max(elem.getName().length(), 30);
+
+		System.out.println(height);
+
 		this.elem = elem;
 		this.addActionListener(this);
 		this.handler = handler;
@@ -25,9 +30,45 @@ public class ElementButton extends JButton implements ActionListener, Serializab
 			Task task = (Task) elem;
 		}
 		this.setForeground(DarkColor.TEXT_DARK);
-		this.setPreferredSize(new Dimension(200,30));
+		if(height > 30){
+			if(height > 60){
+				height = (int) height/2;
+			}
+			this.setHorizontalAlignment(SwingConstants.LEFT);
+			this.setVerticalAlignment(SwingConstants.TOP);
+		}
+		this.setPreferredSize(new Dimension(200,height));
+
 	}
-	
+
+	private static String prepareText(String text){
+		int tolerance = 30;
+		if(text.length()<tolerance){
+			return text;
+		}
+		String[] split = text.split(" ");
+		StringBuilder outputText = new StringBuilder();
+		outputText.append("<html><p style='margin-left:5px'>");
+		int accum = 0;
+		for (String s : split){
+			int length = s.length();
+			if(length>tolerance){
+				outputText.append(s).append("<br>");
+				accum = 0;
+			}
+			else if(accum > tolerance){
+				outputText.append(s).append("<br>");
+				accum = 0;
+			}
+			else{
+				accum+=length+1;
+				outputText.append(s).append(" ");
+			}
+		}
+		outputText.append("</p></html>");
+		return outputText.toString();
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		if(this.elem instanceof Task) {
 			Layout taskLayout = new Layout((Task) elem, handler);

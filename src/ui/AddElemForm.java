@@ -36,12 +36,11 @@ public class AddElemForm extends JPanel implements ActionListener {
 
     public AddElemForm(JPanel panelToAdd, TaskHandler handler, Task task) {
         this.panelToAdd = panelToAdd;
-
         this.handler = handler;
         this.task = task;
-
         textField = new JTextField(20);
         addButton = new JButton("+");
+        textField.addActionListener(this);
         add(textField);
         addButton.addActionListener(this);
         add(addButton);

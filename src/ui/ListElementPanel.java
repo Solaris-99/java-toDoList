@@ -27,39 +27,18 @@ public class ListElementPanel extends JPanel implements Serializable {
 		int labelHeight = 30;
 		String creationDate;
 		String[] creationDateSplit;
-
-
 		creationDateSplit=DATE_FORMAT.format(elem.getCreationDate()).split(" ");
-
-
 		creationDate = String.format(dateDisplayHtml,creationDateSplit[0],creationDateSplit[1]);
-
 		JLabel creationDatePanel = new JLabel(creationDate);
-
-
 		elementButton = new ElementButton(elem, handler);
-
-
 		DeleteButton delButton = new DeleteButton(elem, list, handler);
 		finishDatePanel = new JLabel();
-
 		creationDatePanel.setPreferredSize(new Dimension(labelWidth,labelHeight));
 		finishDatePanel.setPreferredSize(new Dimension(labelWidth,labelHeight));
-		//finishDatePanel.setBorder(BorderFactory.createLineBorder(Color.RED)); debug
-
-
-		//add c date
 		add(creationDatePanel);
-
-		//add task
 		add(elementButton);
-
-		//add f date
 		add(finishDatePanel);
-
-		//add del
 		add(delButton);
-
 		setDoneFont();
 		if(elem.isFinished()) {
 			setFinished(elem.getFinishDate());
@@ -68,7 +47,7 @@ public class ListElementPanel extends JPanel implements Serializable {
 			clearFinishState();
 		}
 
-
+		//this.setPreferredSize(new Dimension(this.getWidth(), elementButton.getHeight()));
 	}
 
 	public ElementButton getElementButton() {
